@@ -1,6 +1,7 @@
 package board.vo;
 
 public class CustomerVo {
+	//fields
 	private String customer_id;
 	private String customer_name;
 	private String customer_nickname;
@@ -8,7 +9,10 @@ public class CustomerVo {
 	private String email;
 	private String tel;
 	private String address;
+	private int		logincheck;
 	
+	
+	//Cunstructor
 	public CustomerVo() {}
 	public CustomerVo(String customer_id, String customer_name, String customer_nickname, String passwd, String email,
 			String tel, String address) {
@@ -21,6 +25,15 @@ public class CustomerVo {
 		this.address = address;
 	}
 	
+	
+	// Constructor for login
+	public CustomerVo(int logincheck) {
+		this.logincheck	=	logincheck;
+		
+	}
+	
+	
+	//getter & setter
 	public String getCustomer_id() {
 		return customer_id;
 	}
@@ -64,6 +77,17 @@ public class CustomerVo {
 		this.address = address;
 	}
 	
+	
+	
+	public int getLogincheck() {
+		return logincheck;
+	}
+	public void setLogincheck(int logincheck) {
+		this.logincheck = logincheck;
+	}
+	
+	
+	//toString
 	@Override
 	public String toString() {
 		return "CustomerVo [customer_id=" + customer_id + ", customer_name=" + customer_name + ", customer_nickname="

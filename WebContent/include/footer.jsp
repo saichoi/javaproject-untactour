@@ -15,7 +15,16 @@
 <body>
 	 <!-- Footer-->
      <footer class="py-5 bg-dark">
-         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Our Website 2021</p></div>
+          <div class="container"><p class="m-0 text-center text-white">
+    <span>대표:김대면</span> <span> | </span>
+    <span>사업자등록번호: 000-00-00000 </span> <span> | </span>
+    <span>사업장 주소지: 부산광역시 진구</span> <span> | </span>
+    <span>개인정보이용약관</span> 
+       </p></div>
+      <div class="container"><p class="m-0 text-center text-white">
+      (주)랜선투어</p></div>
+    
+    
      </footer>
      <!-- Bootstrap core JS-->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

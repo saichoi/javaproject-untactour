@@ -16,15 +16,16 @@ public class categoryActionList implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String                path      =  "/index.jsp";
-		CategoryDao       categoryDao   =  new CategoryDao();
-		List<CategoryVo>  categoryList  =  categoryDao.getCategoryList();
-				
-		System.out.println(categoryList);
+		String path = "/index.jsp";
 		
+		//카테고리 정보 
+		CategoryDao categoryDao = new CategoryDao();
+		List<CategoryVo> categoryList = categoryDao.getCategoryList();
 		request.setAttribute("categoryList", categoryList);
+		
 		// 페이지 이동
 		request.getRequestDispatcher(path).forward(request,  response);
+		
 	}
 
 }

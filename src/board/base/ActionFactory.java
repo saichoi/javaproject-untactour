@@ -1,9 +1,11 @@
 package board.base;
 
+import board.impl.CustomerActionJoin;
+import board.impl.CustomerActionLogin;
+import board.impl.DetailActionView;
 import board.impl.categoryActionList;
 import board.impl.categoryActionView;
 
-//  2개 수정
 public class ActionFactory {
 
 	public Action getAction(String command) {
@@ -11,14 +13,22 @@ public class ActionFactory {
 		Action action = null;
 		
 		if(command == null) {
-				action = new categoryActionList();               // 1. 이부분 수정!!!!!!!!!!!!!!
+				action = new categoryActionList();               
 		}
 		else {
-				switch(command) {                            // 2. 이부분 수정!!!!!!!!!!!!!!
+				switch(command) {
 				
 				case "CATEGORYVIEW": 
 					action = new categoryActionView();
 					break;
+				case  "LOGIN" :
+			         action = new CustomerActionLogin();
+			         break;
+				case  "JOIN" :
+					action = new CustomerActionJoin();
+					break;
+				case "DETAILVIEW":
+					action = new DetailActionView();
 			}	
 		}
 		return action;

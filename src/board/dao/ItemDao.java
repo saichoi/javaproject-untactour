@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.db.DBConn;
-import board.vo.CategoryVo;
 import board.vo.ItemVo;
 import oracle.jdbc.OracleCallableStatement;
 
@@ -22,17 +21,17 @@ public class ItemDao {
 
 	public List<ItemVo> getItemList(String category_code_id, int nowpage, int pagecount) {
 		
-		List<ItemVo>     list  = new ArrayList<ItemVo>();
+		List<ItemVo> list = new ArrayList<ItemVo>();
 	
 	    try {
-			DBConn  db   =  new DBConn();
-			conn         =  db.getConnection();
-			String  sql  =  "{CALL  PKG_TRAVEL.PROC_ITEM_LIST(?, ?, ?, ?, ?) }";
-			cstmt        =  conn.prepareCall(sql);
+			DBConn db = new DBConn();
+			conn =  db.getConnection();
+			String sql = "{CALL  PKG_TRAVEL.PROC_ITEM_LIST(?, ?, ?, ?, ?) }";
+			cstmt = conn.prepareCall(sql);
 			
-			cstmt.setString(1,  category_code_id);     
-			cstmt.setInt(2,  nowpage);                // nowpage     
-			cstmt.setInt(3,  pagecount);              // pagecount     
+			cstmt.setString(1,category_code_id);     
+			cstmt.setInt(2,nowpage);                // nowpage     
+			cstmt.setInt(3,pagecount);              // pagecount     
 			cstmt.registerOutParameter(4, 
 				Types.NUMERIC );                      // 결과 , 전체자료수
 			cstmt.registerOutParameter(5, 
@@ -42,18 +41,18 @@ public class ItemDao {
 									
 			OracleCallableStatement ocstmt = (OracleCallableStatement) cstmt;
 			
-			int  totalcount  = ocstmt.getInt(4);
+			int totalcount = ocstmt.getInt(4);
 			
-			rs    =     ocstmt.getCursor(5);
+			rs =  ocstmt.getCursor(5);
 			while( rs.next() ) {
-				String   item_id       =  rs.getString("item_id");
-				String   item_name      =  rs.getString("item_name");
-				String   item_cont     =  rs.getString("item_cont");   
-				String   regdate    =  rs.getString("regdate");   
-				int      price  =  rs.getInt("price");
-				int      buycount       =  rs.getInt("buycount");
+				String item_id = rs.getString("item_id");
+				String item_name = rs.getString("item_name");
+				String item_cont = rs.getString("item_cont");   
+				String regdate = rs.getString("regdate");   
+				int price = rs.getInt("price");
+				int buycount = rs.getInt("buycount");
 		
-				ItemVo  itemVo    =  new ItemVo(item_id, item_name, item_cont, category_code_id, price, regdate, buycount, totalcount);
+				ItemVo itemVo = new ItemVo(item_id, item_name, item_cont, category_code_id, price, regdate, buycount, totalcount);
 				
 				list.add(itemVo);				
 			}
@@ -73,6 +72,105 @@ public class ItemDao {
 				
 		return list;
 	}
+
+
+	public ItemVo getItem(String item_id) {
+		ItemVo itemVo = null;
+		
+		try {
+			DBConn db = new DBConn();
+			conn = db.getConnection();
+			String sql = "{CALL PKG_TRAVEL.PROC_ITEM_VIEW(?,?) }";
+			cstmt =  conn.prepareCall( sql );
+			
+			cstmt.setInt(1,  Integer.parseInt( item_id ));
+			cstmt.registerOutParameter(2, 
+					oracle.jdbc.OracleTypes.CURSOR );
+			
+			cstmt.executeQuery();
+			
+			OracleCallableStatement ocstmt = (OracleCallableStatement) cstmt; 
+			
+			rs = ocstmt.getCursor( 2 ); 
+			
+			if( rs.next() ) {
+				
+				String itemId = rs.getString("item_id") ;
+				String itemName = rs.getString("item_name"); 
+				String itemCont = rs.getString("item_cont"); 
+				String categoryId = rs.getString("category_code_id"); 
+				int price = rs.getInt("price"); 
+				String regdate = rs.getString("regdate"); 
+				int buycount = rs.getInt("buycount");
+				int totalcount = 0;
+				
+				itemVo = new ItemVo(itemId, itemName, itemCont, categoryId, price, regdate, buycount, totalcount);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if( cstmt != null ) cstmt.close();
+				if( conn  != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return itemVo;
+	}
+
+
+	public List<ItemVo> getRelated(String category_code_id) {
+		List<ItemVo> list = new ArrayList<ItemVo>();
+		
+	    try {
+			DBConn db = new DBConn();
+			conn =  db.getConnection();
+			String sql = "{CALL  PKG_TRAVEL.PROC_RELATED_LIS(?, ?) }";
+			cstmt = conn.prepareCall(sql);
+			
+			cstmt.setString(1,category_code_id);     
+			cstmt.registerOutParameter(2, 
+					oracle.jdbc.OracleTypes.CURSOR );
+			
+			cstmt.executeQuery();
+			
+			OracleCallableStatement ocstmt = (OracleCallableStatement) cstmt; 
+			
+			rs = ocstmt.getCursor( 2 ); 
+			
+			while( rs.next() ) {
+				String item_id = rs.getString("item_id");
+				String item_name = rs.getString("item_name");
+				String item_cont = rs.getString("item_cont");   
+				String regdate = rs.getString("regdate");   
+				int price = rs.getInt("price");
+				int buycount = rs.getInt("buycount");
+		
+				ItemVo itemVo = new ItemVo(item_id, item_name, item_cont, category_code_id, price, regdate, buycount, 4);
+				
+				list.add(itemVo);				
+			}
+			
+			
+		} catch (SQLException e) {;
+			e.printStackTrace();
+		}  finally {
+			try {
+				if( rs    != null ) rs.close();
+				if( cstmt != null ) cstmt.close();
+				if( conn  != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+				
+		return list;
+	}
+
+
 
 
 }

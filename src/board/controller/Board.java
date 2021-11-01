@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import board.base.Action;
 import board.base.ActionFactory;
 
-/**
- * Servlet implementation class Board
- */
 @WebServlet("/board")
 public class Board extends HttpServlet {
 	private static final long serialVersionUID = 1L;
