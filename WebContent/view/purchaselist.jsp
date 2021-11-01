@@ -46,15 +46,15 @@
 					<td>${ purchaseList.subtotal }</td>
 					<td>${ purchaseList.regdate }</td>
 				</tr>
-				<c:set var="total" value="${total+purchaseList.subtotal }"/>
+	<!-- 		<c:set var="total" value="${total+purchaseList.subtotal }"/>    -->	
 				</c:forEach>	
-				<tr>
+			<%-- 	<tr>
 					<th></th>
 					<th></th>
 					<th>총액</th> 
 					<th><c:out value="${ total }"/></th> 
 					<th></th> 				
-				</tr>
+				</tr> --%>
 			</table>
 			<a href="/board?cmd=MAINVIEW&totalBasket=${ totalBasket }" class="btn btn-secondary">쇼핑 계속하기 &raquo;</a>
 		</div>

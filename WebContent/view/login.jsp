@@ -13,6 +13,7 @@
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 <link href="/css/signin2.css" rel="stylesheet">
+<script src = "https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -28,6 +29,14 @@
 	}
 }
 </style>
+<script type="text/javascript">
+var referrer =  document.referrer;
+
+   $(document).ready(function() {
+        $('#ref').val(referrer);
+    //    alert(referrer);
+    }); // 오기전 주소가져오기
+</script>
 </head>
 <body>
 	<%@include file="/include/header.jsp"%>
@@ -41,6 +50,7 @@
 			<main class="form-signin"> <!--  form action="/board?cmd=LOGIN&customer_id=${customer_id}" method="POST"> -->
 			<form action="/board?cmd=LOGIN&totalBasket=${ totalBasket }"
 				method="POST">
+				<input type="hidden" name="ref" id="ref" value=""/>
 				<img class="mb-4" src="/images/logo_horizontal.png" alt=""
 					width="330" height="150">
 				<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -63,7 +73,7 @@
 				</div>
 				<a class="w-100 btn btn-lg btn-primary"
 					style="background-color: #FF9C00; margin-bottom: 10px;"
-					href="../view/join.jsp">Join</a>
+					href="/board?cmd=JOINFORM&totalBasket=${ totalBasket }">Join</a>
 
 				<button class="w-100 btn btn-lg btn-primary" type="submit">Log
 					in</button>

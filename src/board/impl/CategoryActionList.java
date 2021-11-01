@@ -6,12 +6,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import board.base.Action;
-import board.dao.BasketDao;
 import board.dao.CategoryDao;
+import board.dao.ItemDao;
 import board.vo.CategoryVo;
+import board.vo.ItemVo;
 
 public class categoryActionList implements Action {
 
@@ -19,15 +19,17 @@ public class categoryActionList implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String                path      =  "/index.jsp";
-//		HttpSession session = request.getSession(false);
-//	    String id  = (String) session.getAttribute("customer_id");
 	    
 		CategoryDao       categoryDao   =  new CategoryDao();
 		List<CategoryVo>  categoryList  =  categoryDao.getCategoryList();
 		
-//		BasketDao bdao = new BasketDao();
-//		bdao.deleteAllBasket(id);
 		int totalBasket = 0;
+		
+	    ItemDao iDao = new ItemDao();
+	    List<ItemVo> mainList = iDao.getMain();
+	      
+	    request.setAttribute("mainList", mainList);
+//	    System.out.println(mainList);
 		
 		request.setAttribute("categoryList", categoryList);
 	

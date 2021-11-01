@@ -123,6 +123,50 @@ public class ItemDao {
 	}
 
 
+	public List<ItemVo> getMain() {
+		List<ItemVo> iVo = new ArrayList<ItemVo>();
+		Connection conn = null;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
 
+		try {
+			DBConn db = new DBConn();
+			conn = db.getConnection();
+			String sql = "{CALL PKG_TRAVEL.PROC_MAIN_VIEW(?)}";
+			cstmt = conn.prepareCall(sql);
 
+			cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+			cstmt.execute();
+
+			OracleCallableStatement ocstmt = (OracleCallableStatement) cstmt;
+			rs = ocstmt.getCursor(1);
+
+			while (rs.next()) {
+				ItemVo vo = new ItemVo();
+				vo.setItem_id(rs.getString("item_id"));
+				vo.setItem_name(rs.getString("item_name"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setBuycount(rs.getInt("buycount"));
+				vo.setCategory_code_id(rs.getString("category_code_id"));
+
+				iVo.add(vo);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return iVo;
+	}
 }

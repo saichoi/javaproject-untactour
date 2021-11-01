@@ -21,6 +21,7 @@ public class CustomerActionLogin implements Action {
 		int totalBasket = Integer.parseInt(request.getParameter("totalBasket"));
 		String	customer_id		=	request.getParameter("customer_id");
 		String	passwd			=	request.getParameter("passwd");
+		String  reff         =   request.getParameter("ref");
 		
 		System.out.println(customer_id);
 		System.out.println(passwd);
@@ -28,7 +29,15 @@ public class CustomerActionLogin implements Action {
 		CustomerDao	cDao		=	new	CustomerDao();
 		CustomerVo	cVo			=	cDao.getLogin(customer_id, passwd);
 		
-	
+		 //로그인 후 오픈할 페이지 조건
+	      String path = "";
+	      
+	      if(reff.equals("http://localhost:9090/board")||reff.equals("http://localhost:9090/")||reff.equals("http://localhost:9090/board?cmd=LOGOUT")) {
+	         path   = "/board?cmd=MAINVIEW&totalBasket=" + totalBasket;
+	         
+	      } else {
+	         path = reff.substring(21);
+	      };
 	
 		
 		
@@ -53,7 +62,7 @@ public class CustomerActionLogin implements Action {
 			
 			
 			
-			String path	= "/board?cmd=MAINVIEW&totalBasket=" + totalBasket;
+//			String path	= "/board?cmd=MAINVIEW&totalBasket=" + totalBasket;
 			request.getRequestDispatcher(path).forward(request, response);
 			
 			

@@ -22,7 +22,7 @@
     <span>개인정보이용약관</span> 
        </p></div>
       <div class="container"><p class="m-0 text-center text-white">
-      (주)랜선투어</p></div>
+      (주)untactour</p></div>
     
     
      </footer>

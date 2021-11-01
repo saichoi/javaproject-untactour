@@ -95,4 +95,82 @@ public class CustomerDao {
 		
 	}
 	
+	public void updateCustomer(CustomerVo cVo) {
+
+	      Connection          conn   =   null;
+	      CallableStatement   cstmt   =   null;
+	      
+	      try {
+	         DBConn   db   =   new DBConn();
+	         conn      =   db.getConnection();
+	         String   sql   =   "{   CALL PKG_TRAVEL.PROC_CUSTOMER_UPDATE(?,?,?,?,?,?)}";
+	         cstmt   =   conn.prepareCall(sql);
+	         
+	         
+	         cstmt.setString(1, cVo.getCustomer_id());
+	         cstmt.setString(2, cVo.getCustomer_nickname());
+	         cstmt.setString(3, cVo.getPasswd());
+	         cstmt.setString(4, cVo.getEmail());
+	         cstmt.setString(5, cVo.getTel());
+	         cstmt.setString(6, cVo.getAddress());
+	         
+	         cstmt.executeUpdate();
+	         
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }   finally {
+	         
+	         try {
+	            if( cstmt != null ) cstmt.close();
+	            if( conn  != null ) conn.close();
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	         
+	      }
+	   }
+
+	public CustomerVo getmypage(String customer_id) {
+	      CustomerVo         cVo      =   null;
+	      Connection         conn   =   null;
+	      CallableStatement   cstmt   =   null;
+	      
+	      try {
+	         DBConn   db   =   new   DBConn();
+	         conn      =   db.getConnection();
+	         String   sql   =   "{ CALL PKG_TRAVEL.PROC_MYPAGE_VIEW(?,?,?,?) }";
+	         cstmt   =   conn.prepareCall(sql);
+	         
+	         cstmt.setString(1, customer_id);              
+	         cstmt.registerOutParameter(2, Types.VARCHAR);  
+	         cstmt.registerOutParameter(3, Types.VARCHAR);  
+	         cstmt.registerOutParameter(4, Types.VARCHAR);  
+	         
+	         cstmt.executeQuery(); // 프로시저싷행
+	         
+	         String o_customer_nickname   =  cstmt.getString(2); 
+	         String o_email =  cstmt.getString(3); 
+	         String o_tel =  cstmt.getString(4); 
+	         
+	         cVo   = new CustomerVo(o_customer_nickname, o_email, o_tel);
+	         
+	         
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      } finally {
+	            
+	            try {
+	               if( cstmt != null ) cstmt.close();
+	               if( conn  != null ) conn.close();
+	            } catch (SQLException e) {
+	               e.printStackTrace();
+	            }
+	      }
+	      
+	      
+	      return cVo;
+	   }
+	
 }

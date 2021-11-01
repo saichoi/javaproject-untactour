@@ -57,7 +57,8 @@ $(function(){
 					+ '&nowpage=' + nowpage
 					+ '&pagecount=' + pagecount;
 		location.href='/board?cmd=DETAILVIEW' + params;
-	}); 
+	});
+});
 
 </script>
 </head>
