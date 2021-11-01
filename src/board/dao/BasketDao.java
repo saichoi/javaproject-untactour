@@ -1,5 +1,5 @@
 package board.dao;
 
-public class OrderdDao {
+public class BasketDao {
 
 }

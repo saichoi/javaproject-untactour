@@ -14,7 +14,7 @@ import board.base.ActionFactory;
 /**
  * Servlet implementation class Board
  */
-@WebServlet("/Board")
+@WebServlet("/board")
 public class Board extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
