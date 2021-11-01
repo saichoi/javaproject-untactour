@@ -11,10 +11,11 @@ import board.base.Action;
 import board.dao.CategoryDao;
 import board.vo.CategoryVo;
 
-public class CategoryActionList implements Action {
+public class categoryActionList implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String                path      =  "/index.jsp";
 		CategoryDao       categoryDao   =  new CategoryDao();
 		List<CategoryVo>  categoryList  =  categoryDao.getCategoryList();

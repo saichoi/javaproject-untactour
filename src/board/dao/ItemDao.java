@@ -9,17 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.db.DBConn;
+import board.vo.CategoryVo;
 import board.vo.ItemVo;
 import oracle.jdbc.OracleCallableStatement;
 
 public class ItemDao {
+	
+	Connection        conn  = null; 
+	CallableStatement cstmt = null;
+	ResultSet         rs    = null;
+
 
 	public List<ItemVo> getItemList(String category_code_id, int nowpage, int pagecount) {
+		
 		List<ItemVo>     list  = new ArrayList<ItemVo>();
-		Connection        conn  = null; 
-		CallableStatement cstmt = null;
-		ResultSet         rs    = null;
-
 	
 	    try {
 			DBConn  db   =  new DBConn();
@@ -43,7 +46,7 @@ public class ItemDao {
 			
 			rs    =     ocstmt.getCursor(5);
 			while( rs.next() ) {
-				String      item_id       =  rs.getString("item_id");
+				String   item_id       =  rs.getString("item_id");
 				String   item_name      =  rs.getString("item_name");
 				String   item_cont     =  rs.getString("item_cont");   
 				String   regdate    =  rs.getString("regdate");   
@@ -70,5 +73,6 @@ public class ItemDao {
 				
 		return list;
 	}
+
 
 }

@@ -19,7 +19,7 @@
 </head>
 <body>
 	<nav aria-label="Page navigation example">
-		<ul class="pagination">
+		<ul class="pagination"  style="justify-content: center;">
 		<c:if test="${ startPageNum gt 1 }">
 			<li class="page-item">
 				<a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&nowpage=${startPageNum-1}&pagecount=${pagecount}" aria-label="Previous"> 

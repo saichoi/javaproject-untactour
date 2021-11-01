@@ -1,6 +1,8 @@
 package board.vo;
 
 public class ItemVo {
+	
+	//Field
 	private String item_id;
 	private String item_name;
 	private String item_cont;
@@ -10,6 +12,7 @@ public class ItemVo {
 	private int buycount;
 	private int totalcount;     // 전체 자료수
 	
+	//Constructor
 	public ItemVo() {}
 	public ItemVo(String item_id, String item_name, String item_cont, String category_code_id, int price,
 			String regdate, int buycount, int totalcount) {
@@ -23,6 +26,7 @@ public class ItemVo {
 		this.totalcount = totalcount;
 	}
 	
+	//Getter & Setter
 	public String getItem_id() {
 		return item_id;
 	}
@@ -72,6 +76,7 @@ public class ItemVo {
 		this.totalcount = totalcount;
 	}
 	
+	//toString
 	@Override
 	public String toString() {
 		return "ItemVo [item_id=" + item_id + ", item_name=" + item_name + ", item_cont=" + item_cont
