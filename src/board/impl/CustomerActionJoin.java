@@ -33,8 +33,8 @@ public class CustomerActionJoin implements Action {
 		CustomerDao	cDao	=	new	CustomerDao();
 		cDao.insertCustomer(cVo);
 		
-		request.setAttribute("totalBasket", totalBasket);
-		// 완료 후 /index.jsp로 이동.  
+		
+		// 완료 후 /index.jsp로 이동.
 		String path	= "/board?cmd=MAINVIEW&totalBasket=" + totalBasket;
 		request.getRequestDispatcher(path).forward(request, response);
 		

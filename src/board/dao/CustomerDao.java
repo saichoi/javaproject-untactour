@@ -95,40 +95,4 @@ public class CustomerDao {
 		
 	}
 	
-	public void updateCustomer(CustomerVo cVo) {
-
-	      Connection          conn   =   null;
-	      CallableStatement   cstmt   =   null;
-	      
-	      try {
-	         DBConn   db   =   new DBConn();
-	         conn      =   db.getConnection();
-	         String   sql   =   "{   CALL PKG_TRAVEL.PROC_CUSTOMER_UPDATE(?,?,?,?,?,?)}";
-	         cstmt   =   conn.prepareCall(sql);
-	         
-	         
-	         cstmt.setString(1, cVo.getCustomer_id());
-	         cstmt.setString(2, cVo.getCustomer_nickname());
-	         cstmt.setString(3, cVo.getPasswd());
-	         cstmt.setString(4, cVo.getEmail());
-	         cstmt.setString(5, cVo.getTel());
-	         cstmt.setString(6, cVo.getAddress());
-	         
-	         cstmt.executeUpdate();
-	         
-	      } catch (SQLException e) {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }   finally {
-	         
-	         try {
-	            if( cstmt != null ) cstmt.close();
-	            if( conn  != null ) conn.close();
-	         } catch (SQLException e) {
-	            e.printStackTrace();
-	         }
-	         
-	      }
-	   }
-	
 }

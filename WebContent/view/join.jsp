@@ -101,7 +101,7 @@ body {
 						<!-- col-md-12:  mx-auto : 수평 센터 처리 -->
 						<h4 class="mb-3">회원가입</h4>
 						<form class="validation-form" onsubmit="return test()"
-							action="/board?cmd=JOIN&totalBasket=${ totalBasket }" method="POST">
+							action="/board?cmd=JOIN" method="POST">
 							<div class="row">
 
 								<div class="col-md-6 mb-3">
