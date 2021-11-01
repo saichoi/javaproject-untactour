@@ -12,133 +12,122 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="../css/styles.css" rel="stylesheet" />
+<script src = "https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <%
 		//세션 ID값 가져오기
 		String basket_id = session.getId();
 		DecimalFormat dFormat = new DecimalFormat("###,###");		//숫자를 천단위 구분 
 	%>
 
-<script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
 
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script>
-  
-  <style>
-    body {
-      min-height: 100vh;
-
-      
+<style type="text/css">
+    img{
+    max-width: 30%;
     }
-
-    .row>.input-form {
-      max-width: 680px;
-
-      margin-top: 80px;
-      padding: 32px;
-
-      background: #fff;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    .modal-header{
+    border-bottom: 0px solid;
     }
     
-    
+    h1,p{
+    padding: 20px;
+    }
+    p{
+    text-align: center;
+    }
+    .fa{
+    text-align: center;
+    font-size: 40px;
+    color: red;
+    }
+    .btn-primary{
+    margin: 20px auto;
+    display: block; 
+    }
+    .close{
+    cursor: pointer;
+    }
   </style>
+  
 
 </head>
 <body>
 	<%@include file="/include/header.jsp" %>
 	<div class="d-flex" id="wrapper">
-		<!-- Sidebar-->
-		<div class="border-end bg-white" id="sidebar-wrapper">
-			<div class="list-group list-group-flush">
-				<a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="../view/login2.jsp">로그인</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">회원가입</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">마이페이지</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">장바구니</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">결제내역</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">O&A게시판</a>
-			</div>
-		</div>
-		<!-- Page content wrapper-->
-		<div id="page-content-wrapper">
-			<!-- Top navigation-->
-
-			<div class="container-fluid" style="margin-top: 10px;">
-				<button class="btn btn-primary" id="sidebarToggle">Toggle
-					Menu</button>
-				
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				</div>
-			</div>
-	<div class="container" style="margin-top: 30px;">
-		<div class="row">
-			<table width=100%>
-				<tr>
-					<td align="left"><a href="./deletebasket.jsp?basket_id=<%= basket_id %>" class="btn btn-danger">삭제하기</a></td>
-					<td align="right"><a href="./orderbasket.jsp?basket_id=<%= basket_id %>" class="btn btn-success">주문하기</a></td>
-				</tr>
-			</table>
-		</div>
+	<%@ include file="/include/sidebar.jsp" %>
+	<!-- Page content wrapper-->
+	<div id="page-content-wrapper">
+	<div class="container" style="margin-top: 30px;">	
+		
+		
 		
 		<div style="padding-top: 30px;">
-			<!-- table-hover : 마우스 포인터가 있는 행의 배경을 바꾸어 눈에 띄도록 만들어진 클래스 -->
 			<table class="table table-hover">
 				<tr>
-					<th>상품</th>
-					<th>가격</th>
-					<th>수량</th>
-					<th>소계</th>
-					<th>비고</th>
+					<th style="text-align:center; vertical-align: middle;">상품</th>
+					<th style="text-align:center; vertical-align: middle;">가격</th>
+					<th style="text-align:center; vertical-align: middle;">수량</th>
+					<th style="text-align:center; vertical-align: middle;">소계</th>
+					<th style="text-align:center; vertical-align: middle;">비고</th>
+					<th></th>
 				</tr>
-				
+				<c:forEach var="basket" items="${ basketList }">
 				<tr>
-					<%-- <td><%= %></td>
-					<td><%= dFormat.format(basket.getPrice()) %></td>
-					<td><%= BasketVo.getCnt() %></td> --%>
-					<td><%-- <%= dFormat.format(total) %> --%></td> 
-					<td><a href="./removebasket.jsp?id=<%= BasketVo.class %>" class="badge badge-danger">삭제</a></td>
+					<td style="vertical-align: middle;">${ basket.item_name }</td> 
+					<td style="text-align:center; vertical-align: middle;">${ basket.price }</td> 
+					<td style="text-align:center; vertical-align: middle;">${ basket.cnt }</td> 
+					<td style="text-align:center; vertical-align: middle;">${ basket.subtotal }</td> 
+					<td style="text-align:center; vertical-align: middle;">${ basket.regdate }</td> 
+					<td><a href="/board?cmd=DELETEBASKET&totalBasket=${ totalBasket }&basket_id=${basket.basket_id}" class="btn btn-danger">삭제</a></td>
 				</tr>
-				
+				<c:set var="total" value="${total+basket.subtotal }"/>
+				</c:forEach>			
 				<tr>
+					<th colspan="2" style="text-align:center; vertical-align: middle;">총액</th>
+					
 					<th></th>
-					<th></th>
-					<th>총액</th>
-					<th><%-- <%= dFormat.format(sum) %> --%></th>
-					<th></th>
-				</tr>
+					<th colspan="2" style="text-align:center; vertical-align: middle;"><c:out value="${ total }"/></th>
+					
+					<th>
+						<!-- Button to Open the Modal -->
+						    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#myModal">
+						    구매하기
+						    </button>
+						    <!-- The Modal -->
+						    <div class="modal" id="myModal">
+						       <div class="modal-dialog">
+						        <div class="modal-content"> 
+						          <!-- Modal Header -->
+						          <div class="modal-header">
+						            <button type="button" id="close" class="close" data-dismiss="modal" >&times;</button>
+						          </div>
+						          <!-- Modal body -->
+						          <div class="modal-body text-center mb-5">
+						            <img src="/images/right.png" class="img-responsive">
+						            <h1>결제를 진행하시겠습니까?</h1>
+						            <p>확인 버튼을 누를 시 바로 결제가 완료됩니다.</p>
+						            <div class="btn-group">
+						              <button type="button" class="btn btn-danger btn-lg rounded-lg"  onclick="location.href='/board?cmd=MAINVIEW&totalBasket=${ totalBasket }'" style="margin-right:10px; background-color:#0d6efd; "> 확인 </button>
+						              <button type="button" class="btn btn-secondary btn-lg mr-2 rounded-lg" data-dismiss="modal"
+						              	>취소</button>
+						           </div>
+						          </div> 
+						        </div>
+						      </div>
+						    </div>
+						
+					</th>
+				</tr>	
 			</table>
-			<a href="./index.jsp" class="btn btn-secondary">쇼핑 계속하기 &raquo;</a>
-		</div>
-		<hr/>
+			<a href="/board?cmd=MAINVIEW&totalBasket=${ totalBasket }" class="btn btn-secondary" onclick="">쇼핑 계속하기 &raquo;</a>
+	
 	</div>
-
+	</div>
  <footer class="my-3 text-center text-small">
       <p class="mb-1">&copy; 2021 YD</p>
-    </footer>
-  </div>
+</footer>
+</div>
 		
 		
 		
@@ -150,5 +139,8 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="../js/scripts.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

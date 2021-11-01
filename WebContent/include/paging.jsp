@@ -22,17 +22,17 @@
 		<ul class="pagination"  style="justify-content: center;">
 		<c:if test="${ startPageNum gt 1 }">
 			<li class="page-item">
-				<a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&nowpage=${startPageNum-1}&pagecount=${pagecount}" aria-label="Previous"> 
+				<a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&totalBasket=${ totalBasket }&nowpage=${startPageNum-1}&pagecount=${pagecount}" aria-label="Previous"> 
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>  
 		    <c:forEach var="pagenum"  begin="${startPageNum}" end="${endPageNum}" step="1"  >
-			    <li class="page-item"><a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&nowpage=${pagenum}&pagecount=${pagecount}">${ pagenum }</a></li>
+			    <li class="page-item"><a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&totalBasket=${ totalBasket }&nowpage=${pagenum}&pagecount=${pagecount}">${ pagenum }</a></li>
 			</c:forEach>  
 		<c:if test="${ endPageNum  lt totalpagecount }">
 			<li class="page-item">
-				<a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&nowpage=${endPageNum+1}&pagecount=${pagecount}" aria-label="Next"> 
+				<a class="page-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${category_code_id}&category_code_name=${ category_code_name }&totalBasket=${ totalBasket }&nowpage=${endPageNum+1}&pagecount=${pagecount}" aria-label="Next"> 
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>

@@ -39,6 +39,7 @@ public class CategoryDao {
 				CategoryVo   vo  =  new CategoryVo();
 				vo.setCategory_code_id( rs.getString("Category_code_id") );
 				vo.setCategory_code_name( rs.getString("Category_code_name") );
+				
 				categoryList.add(vo);
 			}
 			

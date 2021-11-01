@@ -32,6 +32,18 @@ public class CustomerVo {
 		
 	}
 	
+	//Constructor for update
+			public CustomerVo(String customer_id, String customer_nickname, String passwd, String email,
+					String tel, String address) {
+				this.customer_id	=	customer_id;
+				this.customer_nickname = customer_nickname;
+				this.passwd = passwd;
+				this.email = email;
+				this.tel = tel;
+				this.address = address;
+			}
+		
+	
 	
 	//getter & setter
 	public String getCustomer_id() {

@@ -1,25 +1,28 @@
 package board.vo;
 
 public class BasketVo {
-	private String basket_id;
+	private int basket_id;
 	private String item_id;
 	private String customer_id;
 	private String cnt;
 	private String regdate;
+	private String item_name;
+	private int price;
+	private int subtotal;
 	
 	public BasketVo() {}
-	public BasketVo(String basket_id, String item_id, String customer_id, String cnt, String regdate) {
+	public BasketVo(int basket_id, String item_id, String customer_id, String cnt, String regdate) {
 		this.basket_id = basket_id;
 		this.item_id = item_id;
 		this.customer_id = customer_id;
 		this.cnt = cnt;
 		this.regdate = regdate;
 	}
-
-	public String getBasket_id() {
+	
+	public int getBasket_id() {
 		return basket_id;
 	}
-	public void setBasket_id(String basket_id) {
+	public void setBasket_id(int basket_id) {
 		this.basket_id = basket_id;
 	}
 	public String getItem_id() {
@@ -45,6 +48,24 @@ public class BasketVo {
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getSubtotal() {
+		return subtotal;
+	}
+	public void setSubtotal(int subtotal) {
+		this.subtotal = subtotal;
 	}
 
 	@Override

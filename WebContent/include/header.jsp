@@ -15,18 +15,21 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="../css/styles.css" rel="stylesheet" />
+<script>
+//alert(${ totalBasket });
+</script>
 </head>
 <body>
-
-<%
-	session = request.getSession();
-	//out.print("session:customer_id:"+session.getAttribute("customer_id")+"<br>");
-%>
+	<%
+      session=request.getSession();
+ //  	  String id=(String)session.getAttribute("loginId");
+      out.print("session:customer_id:"+session.getAttribute("customer_id")+"<br>");
+   %>
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container px-4 px-lg-5">
-			<a class="navbar-brand" href="/board">랜선투어</a>
-			<!-- 1. 이부분 수정!!!!!!!!!!! -->
+			<a class="navbar-brand"
+				href="/board?cmd=MAINVIEW&totalBasket=${ totalBasket }">랜선투어</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -37,49 +40,37 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 					<c:forEach var="category" items="${ categoryList }">
 						<li class="nav-item"><a class="nav-link"
-							href="/board?cmd=CATEGORYVIEW&category_code_id=${category.category_code_id}&category_code_name=${category.category_code_name}&nowpage=1&pagecount=8">
+							href="/board?cmd=CATEGORYVIEW&category_code_id=${ category.category_code_id }&category_code_name=${ category.category_code_name }&totalBasket=${ totalBasket }&nowpage=1&pagecount=8">
 								${ category.category_code_name } </a></li>
 					</c:forEach>
 				</ul>
+				<a class="btn btn-outline-dark"
+					href="/board?cmd=BASKETLIST&totalBasket=${ totalBasket }"> <i
+					class="bi-cart-fill me-1"></i> Cart <span
+					class="badge bg-dark text-white ms-1 rounded-pill">${ totalBasket }</span>
+				</a>
 				<c:choose>
 					<c:when test="${sessionScope.customer_id eq null}">
-					<a class="btn btn-outline-dark" href="../view/login.jsp">
-						<i class="bi-cart-fill me-1"></i> 
-						Cart 
-						<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-					</a>
+						<a class="btn btn-outline-dark"
+							href="/board?cmd=LOGINFORM&totalBasket=${ totalBasket }"
+							style="margin-left: 10px">로그인</a>
 					</c:when>
 					<c:otherwise>
-					<a class="btn btn-outline-dark" href="../view/basket.jsp">
-						<i class="bi-cart-fill me-1"></i> 
-						Cart 
-						<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-					</a>
+						<a class="btn btn-outline-dark" href="view/logout.jsp"
+							style="margin-left: 10px">로그아웃</a>
 					</c:otherwise>
-					</c:choose>
-					
-					<c:choose>
-    					<c:when test="${sessionScope.customer_id eq null}">
-							<a class="btn btn-outline-dark" href="../view/login.jsp"
-									style="margin-left: 10px">로그인</a>
-						</c:when>
-						<c:otherwise>
-							<a class="btn btn-outline-dark" onclick="return logout();" href="../view/logout.jsp"
-									style="margin-left: 10px">로그아웃</a>
-						</c:otherwise>
-					</c:choose>
-					
-					
-					<c:choose>
-						<c:when test="${sessionScope.customer_id eq null}">
-							<a class="btn btn-outline-dark" href="../view/login.jsp"
-								style="margin-left: 10px">마이페이지</a>
-						</c:when>
-						<c:otherwise>
-							<a class="btn btn-outline-dark" href="../view/dashboard.jsp"
-								style="margin-left: 10px">마이페이지</a>						
-						</c:otherwise>
-					</c:choose>
+				</c:choose>
+				<c:choose>
+					<c:when test="${sessionScope.customer_id eq null}">
+						<a class="btn btn-outline-dark"
+							href="/board?cmd=LOGINFORM&totalBasket=${ totalBasket }"
+							style="margin-left: 10px">마이페이지</a>
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-outline-dark" href="/board?cmd=MYPAGE&totalBasket=${ totalBasket }"
+							style="margin-left: 10px">마이페이지</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</nav>

@@ -14,9 +14,7 @@
 </head>
 <body>
 	<%
-		session.invalidate();
-		response.sendRedirect("../index.jsp");
-	
+		response.sendRedirect("../board?cmd=LOGOUT");
 	%>
 </body>
 </html>

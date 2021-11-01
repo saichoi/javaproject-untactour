@@ -94,6 +94,7 @@
 	right: 130px;
 	text-align: left;
 	padding-top: 10px;
+	display:none;
 }
 
 .txt {
@@ -154,7 +155,7 @@
 	<script>
         $(document).ready(function () {
             // 처음에는 #notice 태그 display : none
-            $("#notice").hide();
+   //         $("#notice").hide();
 
             // .notice 태그 클릭시 실행
             $(".notice").click(function () {

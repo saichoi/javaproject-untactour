@@ -624,14 +624,15 @@ VALUES (
 ,TO_DATE('2021-09-14 10:00:00','YYYY-MM-DD HH24:MI:SS')
 );
 COMMIT;
+----------------------------------------------------------------------------------- UPDATE
+UPDATE ITEM
+SET
+ITEM_NAME = '[랜선투어]  발리 우붓으로 떠나는 "찐우붓" 원데이트립'
+WHERE   ITEM_ID = 307;
 
------------------
 ALTER TABLE  ITEM
   ADD   BUYCOUNT   NUMBER(5)  DEFAULT  0;
   
 UPDATE  ITEM
  SET    BUYCOUNT = 0;
-COMMIT;
-
-
-
+COMMIT; 

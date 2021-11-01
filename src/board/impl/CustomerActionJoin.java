@@ -17,7 +17,7 @@ public class CustomerActionJoin implements Action {
 		// TODO Auto-generated method stub
 
 		request.setCharacterEncoding("utf-8");
-		
+		int totalBasket = Integer.parseInt(request.getParameter("totalBasket"));
 		//회원가입 입력받은 parameter 받아들임.
 		String	customer_id			=	request.getParameter("customer_id");	
 		String	customer_name		=	request.getParameter("customer_name");	
@@ -33,9 +33,9 @@ public class CustomerActionJoin implements Action {
 		CustomerDao	cDao	=	new	CustomerDao();
 		cDao.insertCustomer(cVo);
 		
-		
-		// 완료 후 /index.jsp로 이동.
-		String path	=	"/index.jsp";
+		request.setAttribute("totalBasket", totalBasket);
+		// 완료 후 /index.jsp로 이동.  
+		String path	= "/board?cmd=MAINVIEW&totalBasket=" + totalBasket;
 		request.getRequestDispatcher(path).forward(request, response);
 		
 		
