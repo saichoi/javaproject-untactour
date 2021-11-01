@@ -7,16 +7,20 @@ public class ItemVo {
 	private String category_code_id;
 	private int price;
 	private String regdate;
+	private int buycount;
+	private int totalcount;     // 전체 자료수
 	
 	public ItemVo() {}
 	public ItemVo(String item_id, String item_name, String item_cont, String category_code_id, int price,
-			String regdate) {
+			String regdate, int buycount, int totalcount) {
 		this.item_id = item_id;
 		this.item_name = item_name;
 		this.item_cont = item_cont;
 		this.category_code_id = category_code_id;
 		this.price = price;
 		this.regdate = regdate;
+		this.buycount = buycount;
+		this.totalcount = totalcount;
 	}
 	
 	public String getItem_id() {
@@ -55,10 +59,23 @@ public class ItemVo {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public int getBuycount() {
+		return buycount;
+	}
+	public void setBuycount(int buycount) {
+		this.buycount = buycount;
+	}
+	public int getTotalcount() {
+		return totalcount;
+	}
+	public void setTotalcount(int totalcount) {
+		this.totalcount = totalcount;
+	}
 	
 	@Override
 	public String toString() {
 		return "ItemVo [item_id=" + item_id + ", item_name=" + item_name + ", item_cont=" + item_cont
-				+ ", category_code_id=" + category_code_id + ", price=" + price + ", regdate=" + regdate + "]";
+				+ ", category_code_id=" + category_code_id + ", price=" + price + ", regdate=" + regdate + ", buycount="
+				+ buycount + "]";
 	}
 }

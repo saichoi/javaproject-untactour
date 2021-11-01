@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>          <!-- 2개수정 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,7 +17,7 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container px-4 px-lg-5">
-			<a class="navbar-brand" href="#!">랜선투어</a>
+			<a class="navbar-brand" href="/board" >랜선투어</a>                       <!-- 1. 이부분 수정!!!!!!!!!!! -->
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -25,11 +26,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-					<li class="nav-item"><a class="nav-link" href="#!">국내</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">유럽</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">동남아</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">아메리카/남미</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">오세아니아/동아시아</a></li>
+				<c:forEach var="category" items="${ categoryList }"> 
+						<li class="nav-item">
+							<a class="nav-link" href="/board?cmd=CATEGORYVIEW&category_code_id=${ category.category_code_id }&category_code_name=${ category.category_code_name }&nowpage=1&pagecount=2"">
+								${ category.category_code_name }
+							</a>
+						</li>     <!-- 2. 이부분 수정!!!!!!!!!!! -->
+					</c:forEach> 
 				</ul>
 				<form class="d-flex">
 					<button class="btn btn-outline-dark" type="submit">

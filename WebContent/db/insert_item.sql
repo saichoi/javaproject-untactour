@@ -215,7 +215,7 @@ VALUES ('302',
         5. 구매한 오디오투어에서 30일동안 청취 가능\n',
         '300',
         4500,
-        to_date('2021-11-02 10:00:00','YYYY-MM-DD HH24:MI:SS''));
+        to_date('2021-11-02 10:00:00','YYYY-MM-DD HH24:MI:SS'));
 
 
 INSERT INTO item (item_id,item_name,item_cont,category_code_id,price,regdate) 
@@ -624,3 +624,15 @@ VALUES (
 ,TO_DATE('2021-09-14 10:00:00','YYYY-MM-DD HH24:MI:SS')
 );
 COMMIT;
+----------------------------------------------------------------------------------- UPDATE
+UPDATE ITEM
+SET
+ITEM_NAME = '[랜선투어]  발리 우붓으로 떠나는 "찐우붓" 원데이트립'
+WHERE   ITEM_ID = 307;
+
+ALTER TABLE  ITEM
+  ADD   BUYCOUNT   NUMBER(5)  DEFAULT  0;
+  
+UPDATE  ITEM
+ SET    BUYCOUNT = 0;
+COMMIT; 
